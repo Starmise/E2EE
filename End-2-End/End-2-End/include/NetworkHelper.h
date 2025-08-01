@@ -5,7 +5,7 @@
 #pragma comment(lib, "Ws2_32.lib")
 
 class
-  NetworkHelper {
+NetworkHelper {
 public:
   /*
   * @brief
@@ -19,6 +19,7 @@ public:
   */
   bool
   StartServer(int port);
+
   /*
   * @brief
   */

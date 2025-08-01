@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\CryptoHelper.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\NetworkHelper.cpp" />
   </ItemGroup>

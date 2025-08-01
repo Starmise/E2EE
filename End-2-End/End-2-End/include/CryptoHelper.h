@@ -4,7 +4,7 @@
 #include "openssl/aes.h"
 
 class
-  CryptoHelper {
+CryptoHelper {
 public:
   CryptoHelper();
   ~CryptoHelper();
@@ -51,7 +51,7 @@ public:
   * @brief
   */
   std::vector<unsigned char>
-  AESEncrypt(const std::string& plaintext, std::vector<unsigned char> outIV);
+  AESEncrypt(const std::string& plaintext, std::vector<unsigned char>& outIV);
 
   /*
   * @brief
