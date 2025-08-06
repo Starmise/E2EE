@@ -116,7 +116,7 @@ NetworkHelper::ReceiveData(SOCKET socket) {
 }
 
 std::vector<unsigned char>
-NetworkHelper::ReceiveData(SOCKET socket, int size) {
+NetworkHelper::ReceiveDataBinary(SOCKET socket, int size) {
   std::vector<unsigned char> buffer(size);
   int len = recv(socket, reinterpret_cast<char*> (buffer.data()), size, 0);
 

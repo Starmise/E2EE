@@ -1,4 +1,5 @@
 #pragma once
+#include "Prerequisites.h"
 #include "NetworkHelper.h"
 #include "CryptoHelper.h"
 
@@ -10,13 +11,24 @@ public:
 
   ~Server();
 
-  bool Start();
-  void WaitForClient();
-  void ReceiveEncryptedMessage();
+  /*
+  */
+  bool
+    Start();
+
+  /*
+  */
+  void
+    WaitForClient();
+
+  /*
+  */
+  void
+    ReceiveEncryptedMessage();
 
 private:
   int m_port;
-  int m_clientSock;
+  SOCKET m_clientSock;
   NetworkHelper m_net;
   CryptoHelper m_crpto;
 };

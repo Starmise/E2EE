@@ -18,17 +18,17 @@ CryptoHelper:: ~CryptoHelper() {
 
 void
 CryptoHelper::GenerateRSAKeys() {
-  BIGNUM* bn = BN_new();
+  BIGNUM* bn = BN_new(); // Create BIGNUM for the public exponent
   BN_set_word(bn, RSA_F4);
   rsaKeyPair = RSA_new();
-  RSA_generate_key_ex(rsaKeyPair, 2048, bn, nullptr);
+  RSA_generate_key_ex(rsaKeyPair, 2048, bn, nullptr); // Generate RSA key pair with 2048 bits
   BN_free(bn);
 }
 
 std::string
 CryptoHelper::GetPublicKeyString() const {
   BIO* bio = BIO_new(BIO_s_mem());
-  PEM_write_bio_RSAPublicKey(bio, rsaKeyPair);
+  PEM_write_bio_RSAPublicKey(bio, rsaKeyPair); // Write the public key to the BIO in PEM format
   char* buffer = nullptr; // KeyData
   size_t length = BIO_get_mem_data(bio, &buffer);
   std::string publickey(buffer, length);
@@ -39,8 +39,8 @@ CryptoHelper::GetPublicKeyString() const {
 
 void
 CryptoHelper::LoadPeerPublickey(const std::string& pemkey) {
-  BIO* bio = BIO_new_mem_buf(pemkey.data(), static_cast<int>(pemkey.size()));
-  peerPublicKey = PEM_read_bio_RSAPublicKey(bio, nullptr, nullptr, nullptr);
+  BIO* bio = BIO_new_mem_buf(pemkey.data(), static_cast<int>(pemkey.size())); // Create a BIO from the PEM string
+  peerPublicKey = PEM_read_bio_RSAPublicKey(bio, nullptr, nullptr, nullptr); // Read the public key from the PEM string
   BIO_free(bio);
   if (!peerPublicKey) {
     throw std::runtime_error("Failed to load peer public key: "
