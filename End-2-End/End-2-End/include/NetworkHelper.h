@@ -27,7 +27,7 @@ public:
   * @brief Wait for and accept an incoming client.
   * @return SOCKET Socket of the accepted client, or INVALID_SOCKET if it fails.
   */
-  int
+  SOCKET
   AcceptClient();
 
   // Client mode
@@ -81,6 +81,18 @@ public:
   */
   void
   close(SOCKET socket);
+
+  /*
+  * @brief
+  */
+  bool
+  SendAll(SOCKET s, const unsigned char* data, int len);
+
+  /*
+  * @brief
+  */
+  bool
+  ReceiveExact(SOCKET s, unsigned char* out, int len);
 
   SOCKET m_serverSocket = -1; // Server socket
 private:

@@ -4,7 +4,7 @@
 #include "Prerequisites.h"
 
 class
-  Client {
+Client {
 public:
   Client() = default;
   Client(const std::string& ip, int port);
@@ -13,22 +13,37 @@ public:
   /*
   */
   bool
-    Connect();
+  Connect();
 
   /*
   */
   void
-    ExchangeKeys();
+  ExchangeKeys();
 
   /*
   */
   void
-    SendAESKeyEncrypted();
+  SendAESKeyEncrypted();
 
   /*
   */
   void
-    SendEncryptedMessage(const std::string& message);
+  SendEncryptedMessage(const std::string& message);
+
+  /*
+  */
+  void
+  StartReceiveLoop();
+
+  /*
+  */
+  void
+  SendEncryptedMessageLoop();
+
+  /*
+  */
+  void
+  StartChatLoop();
 
 private:
   std::string m_ip;
