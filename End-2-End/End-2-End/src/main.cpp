@@ -2,7 +2,11 @@
 #include "Server.h"
 #include "Client.h"
 
-static void runServer(int port) {
+/*
+ * Simple end-to-end encrypted chat application using RSA and AES for the server.
+*/
+static void
+runServer(int port) {
   Server s(port);
   if (!s.Start()) {
     std::cerr << "[Main]Couldn't start server.\n";
@@ -12,7 +16,11 @@ static void runServer(int port) {
   s.StartChatLoop(); // Now receive and send in parallel
 }
 
-static void runClient(const std::string& ip, int port) {
+/*
+ * Simple end-to-end encrypted chat application using RSA and AE for the client.
+*/
+static void
+runClient(const std::string& ip, int port) {
   Client c(ip, port);
   if (!c.Connect()) { std::cerr << "[Main] Couldn't connect.\n"; return; }
 

@@ -2,7 +2,7 @@
 #include "Prerequisites.h"
 #include <WinSock2.h>
 #include <WS2tcpip.h>
-#pragma comment(lib, "Ws2_32.lib")
+#pragma comment(lib, "Ws2_32.lib") // Link with Ws2_32.lib
 
 class
 NetworkHelper {
@@ -83,13 +83,23 @@ public:
   close(SOCKET socket);
 
   /*
-  * @brief
+  * @brief Sends all data through the socket, ensuring that all bytes are sent.
+  * @param s The socket to send data through.
+  * @param data Pointer to the data to be sent.
+  * @param len The length of the data to be sent.
+  * @return true If all data was sent successfully.
+  * @return false If an error occurs while sending data.
   */
   bool
   SendAll(SOCKET s, const unsigned char* data, int len);
 
   /*
-  * @brief
+  * @brief Receives an exact number of bytes from the socket.
+  * @param s The socket to receive data from.
+  * @param out Pointer to the buffer where the received data will be stored.
+  * @param len The number of bytes to receive.
+  * @return true If the exact number of bytes was received successfully.
+  * @return false If an error occurs while receiving data.
   */
   bool
   ReceiveExact(SOCKET s, unsigned char* out, int len);
