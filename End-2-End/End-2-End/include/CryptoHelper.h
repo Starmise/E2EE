@@ -48,7 +48,7 @@ public:
   * @param encryptedikey The encrypted AES key received from the client.
   */
   void
-  DecryptAESKey(const std::vector<unsigned char> encryptedikey);
+  DecryptAESKey(const std::vector<unsigned char>& encryptedikey);
 
   /*
   * @brief Encrypt a message using AES-256 in CBC mode.

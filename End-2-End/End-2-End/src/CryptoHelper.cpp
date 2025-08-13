@@ -71,7 +71,7 @@ CryptoHelper::EncryptAESKeyWithPeer() {
 }
 
 void
-CryptoHelper::DecryptAESKey(const std::vector<unsigned char> encryptedikey) {
+CryptoHelper::DecryptAESKey(const std::vector<unsigned char>& encryptedikey) {
   RSA_private_decrypt(encryptedikey.size(),
                       encryptedikey.data(),
                       aesKey,

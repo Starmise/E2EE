@@ -9,7 +9,7 @@ static void
 runServer(int port) {
   Server s(port);
   if (!s.Start()) {
-    std::cerr << "[Main]Couldn't start server.\n";
+    std::cerr << "[Main] Couldn't start server.\n";
     return;
   }
   s.WaitForClient(); // Key exchange
@@ -73,24 +73,11 @@ main(int argc, char** argv) {
       std::cerr << "Unknown mode. Use: server | client\n";
       return 1;
     }
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   }
 
-  if (mode == "server") {
-    Server s(port);
-    if (!s.Start()) return 1;
-    s.WaitForClient();
-    s.ReceiveEncryptedMessage();
-  }
-  else {
-    Client c(ip, port);
-    if (!c.Connect()) return 1;
-    c.ExchangeKeys();
-    c.SendAESKeyEncrypted();
-    c.SendEncryptedMessage("Hello server, AES encryption");
-  }
+  if (mode == "server") runServer(port);
+  else runClient(ip, port);
 
-  std::cout << "Done. Press 'Enter' to quit...";
-  std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-  std::cin.get();
   return 0;
 }

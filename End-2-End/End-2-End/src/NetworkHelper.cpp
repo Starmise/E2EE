@@ -54,7 +54,7 @@ NetworkHelper::StartServer(int port) {
   }
 
   std::cout << "Server started on port " << port << std::endl;
-  return false;
+  return true;
 }
 
 SOCKET

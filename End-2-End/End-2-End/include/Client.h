@@ -37,16 +37,16 @@ public:
   SendEncryptedMessage(const std::string& message);
 
   /*
-  * @brief Receives messages from the server in a loop
-  */
-  void
-  StartReceiveLoop();
-
-  /*
   * @brief Receives messages from the server in a loop, encrypts them, and sends them back.
   */
   void
   SendEncryptedMessageLoop();
+
+  /*
+  * @brief Receives messages from the server in a loop
+  */
+  void
+  StartReceiveLoop();
 
   /*
   * @brief Starts the chat loop, which allows the user to send and receive messages

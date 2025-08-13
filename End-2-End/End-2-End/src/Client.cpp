@@ -71,6 +71,29 @@ Client::SendEncryptedMessage(const std::string& message) {
   m_net.SendData(m_serverSock, cipher);
 }
 
+void
+Client::SendEncryptedMessageLoop() {
+  std::string msg;
+  while (true) {
+    std::cout << "Client: ";
+    std::getline(std::cin, msg);
+    if (msg == "/exit") break;
+
+    std::vector<unsigned char> iv;
+    auto cipher = m_crypto.AESEncrypt(msg, iv);
+
+    m_net.SendData(m_serverSock, iv);
+
+    uint32_t clen = static_cast<uint32_t>(cipher.size());
+    uint32_t nlen = htonl(clen);
+    std::vector<unsigned char> len4(reinterpret_cast<unsigned char*>(&nlen),
+      reinterpret_cast<unsigned char*>(&nlen) + 4);
+
+    m_net.SendData(m_serverSock, len4);
+    m_net.SendData(m_serverSock, cipher);
+  }
+}
+
 void 
 Client::StartReceiveLoop() {
   while (true) {
@@ -104,29 +127,6 @@ Client::StartReceiveLoop() {
     std::cout.flush();
   }
   std::cout << "[Client] ReceiveLoop ended.\n";
-}
-
-void
-Client::SendEncryptedMessageLoop() {
-  std::string msg;
-  while (true) {
-    std::cout << "Client: ";
-    std::getline(std::cin, msg);
-    if (msg == "/exit") break;
-
-    std::vector<unsigned char> iv;
-    auto cipher = m_crypto.AESEncrypt(msg, iv);
-
-    m_net.SendData(m_serverSock, iv);
-
-    uint32_t clen = static_cast<uint32_t>(cipher.size());
-    uint32_t nlen = htonl(clen);
-    std::vector<unsigned char> len4(reinterpret_cast<unsigned char*>(&nlen),
-      reinterpret_cast<unsigned char*>(&nlen) + 4);
-
-    m_net.SendData(m_serverSock, len4);
-    m_net.SendData(m_serverSock, cipher);
-  }
 }
 
 void
