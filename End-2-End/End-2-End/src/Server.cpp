@@ -36,7 +36,7 @@ Server::WaitForClient() {
 
   // 2. Receive public key from client
   std::string clientPubKey = m_net.ReceiveData(m_clientSock);
-  m_crpto.LoadPeerPublickey(clientPubKey);
+  m_crpto.LoadPeerPublicKey(clientPubKey);
 
   // 3. Receive AES key encrypted with the server's public key
   std::vector<unsigned char> encryptedAESKey = m_net.ReceiveDataBinary(m_clientSock, 256);
@@ -62,7 +62,7 @@ Server::ReceiveEncryptedMessage() {
 
 void
 Server::StartReceiveLoop() {
-  while (m_running) {
+  while (true) {
     // 1) IV (16)
     auto iv = m_net.ReceiveDataBinary(m_clientSock, 16);
     if (iv.empty()) {
@@ -89,7 +89,7 @@ Server::StartReceiveLoop() {
 
     // 4) Decode and show
     std::string plain = m_crpto.AESDecrypt(cipher, iv);
-    std::cout << "\n[Client]: " << plain << "\Server: ";
+    std::cout << "\n[Client]: " << plain << "\nServer: ";
     std::cout.flush();
   }
 }

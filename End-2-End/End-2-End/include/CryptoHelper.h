@@ -28,7 +28,7 @@ public:
   * @param pemkey The PEM formatted public key string.
   */
   void
-  LoadPeerPublickey(const std::string& pemkey);
+  LoadPeerPublicKey(const std::string& pemkey);
 
   // AES
   /*

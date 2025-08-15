@@ -39,7 +39,7 @@ CryptoHelper::GetPublicKeyString() const {
 }
 
 void
-CryptoHelper::LoadPeerPublickey(const std::string& pemkey) {
+CryptoHelper::LoadPeerPublicKey(const std::string& pemkey) {
   BIO* bio = BIO_new_mem_buf(pemkey.data(), static_cast<int>(pemkey.size())); // Create a BIO from the PEM string
   peerPublicKey = PEM_read_bio_RSAPublicKey(bio, nullptr, nullptr, nullptr); // Read the public key from the PEM string
   BIO_free(bio);

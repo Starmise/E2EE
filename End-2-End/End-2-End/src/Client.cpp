@@ -34,7 +34,7 @@ void
 Client::ExchangeKeys() {
   // 1. Receive the public key of the server
   std::string serverPubKey = m_net.ReceiveData(m_serverSock);
-  m_crypto.LoadPeerPublickey(serverPubKey);
+  m_crypto.LoadPeerPublicKey(serverPubKey);
   std::cout << "[Client] Public key of the server received.\n";
 
   // 2. Send the public key of the client
@@ -123,7 +123,7 @@ Client::StartReceiveLoop() {
 
     // 4) Descifrar y mostrar
     std::string plain = m_crypto.AESDecrypt(cipher, iv);
-    std::cout << "\n[Server]: " << plain << "\Client: ";
+    std::cout << "\n[Server]: " << plain << "\nClient: ";
     std::cout.flush();
   }
   std::cout << "[Client] ReceiveLoop ended.\n";
